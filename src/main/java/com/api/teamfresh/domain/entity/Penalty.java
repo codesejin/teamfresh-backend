@@ -1,4 +1,4 @@
-package com.api.teamfresh.domain;
+package com.api.teamfresh.domain.entity;
 
 import com.api.teamfresh.domain.constants.ObjectionStatus;
 import com.api.teamfresh.util.BaseTimeEntity;

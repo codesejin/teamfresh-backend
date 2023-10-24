@@ -1,10 +1,9 @@
 package com.api.teamfresh.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import com.api.teamfresh.domain.constants.ClaimStatus;
 import com.api.teamfresh.domain.constants.ClaimType;
+import com.api.teamfresh.domain.entity.Claim;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

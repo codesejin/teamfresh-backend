@@ -1,4 +1,4 @@
-package com.api.teamfresh.domain;
+package com.api.teamfresh.domain.entity;
 
 
 import com.api.teamfresh.domain.constants.BlameType;

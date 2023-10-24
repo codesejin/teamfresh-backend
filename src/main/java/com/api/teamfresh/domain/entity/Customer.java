@@ -1,30 +1,34 @@
-package com.api.teamfresh.domain;
+package com.api.teamfresh.domain.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
- * 운송사 Entity
+ * 고객사 Entity
  */
-@Entity
-public class Carrier {
 
+@NoArgsConstructor
+@Entity
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy="carrier", cascade= CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy="customer", cascade= CascadeType.ALL, orphanRemoval=true)
     private List<VOC> vocs;
-
-    @OneToMany(mappedBy = "carrier", fetch = FetchType.EAGER)
-    private List<Driver> driver;
     @Column
-    private String name; // 운송사 이름
+    private String name; // 고객사 이름
+
+    @Column
+    private String contactPerson; // 담당자 이름
+
+    private String contactNumber; // 담당자 연락처
+
 }

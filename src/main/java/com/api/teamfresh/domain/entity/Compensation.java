@@ -1,4 +1,4 @@
-package com.api.teamfresh.domain;
+package com.api.teamfresh.domain.entity;
 
 import com.api.teamfresh.util.BaseTimeEntity;
 import jakarta.persistence.Column;
@@ -11,18 +11,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 /**
- * 이의제기 Entity
+ * 배상 Entity
  */
 @Entity
-public class Objection extends BaseTimeEntity {
+public class Compensation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "penalty_id")
-    private Penalty penalty; // 이의제기 대상 패널티
-
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="voc_id")
+    private VOC voc;
     @Column
-    private String content;
+    private Float amount;
+
 }
