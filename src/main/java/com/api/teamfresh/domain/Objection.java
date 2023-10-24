@@ -1,5 +1,6 @@
 package com.api.teamfresh.domain;
 
+import com.api.teamfresh.util.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,7 +14,7 @@ import jakarta.persistence.OneToOne;
  * 이의제기 Entity
  */
 @Entity
-public class Objection {
+public class Objection extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
