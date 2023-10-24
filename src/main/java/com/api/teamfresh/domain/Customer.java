@@ -8,10 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
 /**
  * 고객사 Entity
  */
+
+@NoArgsConstructor
 @Entity
 public class Customer {
     @Id
@@ -22,8 +25,10 @@ public class Customer {
     private List<VOC> vocs;
     @Column
     private String name; // 고객사 이름
+
     @Column
     private String contactPerson; // 담당자 이름
-    @Column
+
     private String contactNumber; // 담당자 연락처
+
 }

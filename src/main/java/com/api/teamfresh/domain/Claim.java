@@ -13,10 +13,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 클레임 Entity
  */
+@Getter
+@NoArgsConstructor
 @Entity
 public class Claim extends BaseTimeEntity {
     @Id
@@ -33,4 +37,9 @@ public class Claim extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(name="claim_type")
     private ClaimType claimType;
+
+    public Claim(ClaimType claimType) {
+        this.claimStatus = ClaimStatus.INCOMING;
+        this.claimType = claimType;
+    }
 }
