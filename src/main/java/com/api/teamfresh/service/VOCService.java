@@ -69,10 +69,10 @@ public class VOCService {
 
     private Driver findOrSaveDriver(CreateVOC createVOC) {
         Driver driver = driverRepository.findByNameAndPhoneNumber(createVOC.getDriverName(),
-                        createVOC.getDriverPhoneNo())
+                        createVOC.getDriverPhoneNumber())
                 .orElseGet(() -> {
                     // 운전기사가 존재하지 않을 경우, 신규 저장
-                    Driver newDriver = Driver.from(createVOC.getDriverName(), createVOC.getDriverPhoneNo());
+                    Driver newDriver = Driver.from(createVOC.getDriverName(), createVOC.getDriverPhoneNumber());
                     return driverRepository.save(newDriver);
                 });
         return driver;

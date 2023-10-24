@@ -10,12 +10,12 @@ public class CarrierResponse {
     private long id;
     private CarrierName carrierName;
     private String DriverName;
-    private String DriverPhoneNum;
+    private String DriverPhoneNumber;
     public CarrierResponse(Carrier carrier, Driver driver) {
         this.id = carrier.getId();
         this.carrierName = carrier.getCarrierName();
         this.DriverName = driver.getName();
-        this.DriverPhoneNum = driver.getName();
+        this.DriverPhoneNumber = driver.getPhoneNumber();
     }
 
     public static CarrierResponse of(Carrier carrier, Driver driver) {
