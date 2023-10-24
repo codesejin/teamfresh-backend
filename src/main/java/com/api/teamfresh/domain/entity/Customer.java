@@ -25,10 +25,18 @@ public class Customer {
     private List<VOC> vocs;
     @Column
     private String name; // 고객사 이름
-
     @Column
     private String contactPerson; // 담당자 이름
-
+    @Column
     private String contactNumber; // 담당자 연락처
 
+    private Customer(String name, String contactPerson, String contactNumber) {
+        this.name = name;
+        this.contactPerson = contactPerson;
+        this.contactNumber = contactNumber;
+    }
+
+    public static Customer from(String name, String contactPerson, String contactNumber) {
+        return new Customer(name, contactPerson, contactNumber);
+    }
 }

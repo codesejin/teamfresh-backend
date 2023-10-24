@@ -8,10 +8,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 기사 Entity
  */
+@Getter
+@NoArgsConstructor
 @Entity
 public class Driver {
 
@@ -25,7 +29,19 @@ public class Driver {
     private String name;
     @Column
     private String phoneNumber;
-
     @Column(name = "monthly_penalty")
     private Float monthlyPenalty; // 패널티 차감 금액
+
+    public Driver (String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.monthlyPenalty = 0f;
+    }
+    public static Driver from (String name, String phoneNumber) {
+        return new Driver(name, phoneNumber);
+    }
+
+    public void setCarrier(Carrier carrier) {
+        this.carrier = carrier;
+    }
 }

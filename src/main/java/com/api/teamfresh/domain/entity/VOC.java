@@ -15,10 +15,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * VOC Entity
  */
+@Getter
+@NoArgsConstructor
 @Entity
 public class VOC extends BaseTimeEntity {
 
@@ -33,17 +37,23 @@ public class VOC extends BaseTimeEntity {
     @Column
     private BlameType blameType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "carrier_id")
     private Carrier carrier;
 
     @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
     private Compensation compensation;
 
-    @Column
-    private boolean isCompensationRequested; // 배상 요청 여부
+    private VOC(BlameType blameType, Customer customer, Carrier carrier) {
+        this.blameType = blameType;
+        this.customer = customer;
+        this.carrier = carrier;
+    }
+    public static VOC from(BlameType blameType, Customer customer, Carrier carrier) {
+        return new VOC(blameType ,customer, carrier);
+    }
 }
