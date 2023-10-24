@@ -3,6 +3,7 @@ package com.api.teamfresh.domain.entity;
 import com.api.teamfresh.domain.constants.ClaimStatus;
 import com.api.teamfresh.domain.constants.ClaimType;
 import com.api.teamfresh.util.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,7 +20,6 @@ import lombok.NoArgsConstructor;
 /**
  * 클레임 Entity
  */
-@Getter
 @NoArgsConstructor
 @Entity
 public class Claim extends BaseTimeEntity {
