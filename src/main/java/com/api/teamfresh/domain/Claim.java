@@ -1,6 +1,7 @@
 package com.api.teamfresh.domain;
 
 import com.api.teamfresh.domain.constants.ClaimStatus;
+import com.api.teamfresh.domain.constants.ClaimType;
 import com.api.teamfresh.util.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,4 +29,8 @@ public class Claim extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(name="claim_status")
     private ClaimStatus claimStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="claim_type")
+    private ClaimType claimType;
 }

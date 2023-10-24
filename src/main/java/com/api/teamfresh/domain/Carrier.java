@@ -1,6 +1,7 @@
 package com.api.teamfresh.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,5 +25,6 @@ public class Carrier {
 
     @OneToMany(mappedBy = "carrier", fetch = FetchType.EAGER)
     private List<Driver> driver;
-
+    @Column
+    private String name; // 운송사 이름
 }

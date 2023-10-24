@@ -14,9 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import java.util.List;
 
 /**
  * VOC Entity
@@ -42,9 +40,6 @@ public class VOC extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carrier_id")
     private Carrier carrier;
-
-    @OneToMany(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Penalty> penalties;
 
     @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
     private Compensation compensation;
