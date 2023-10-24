@@ -7,8 +7,8 @@ import lombok.Getter;
 
 @Getter
 public class CreateVOC {
-    Long claimId;
-    BlameType blameType;
+    private Long claimId;
+    private BlameType blameType;
     private String customerName; // 고객사 이름
     private String contactPerson; // 담당자 이름
     private String contactNumber; // 담당자 연락처

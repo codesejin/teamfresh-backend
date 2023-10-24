@@ -1,6 +1,7 @@
 package com.api.teamfresh.service;
 
 import com.api.teamfresh.controller.dto.request.CreateVOC;
+import com.api.teamfresh.controller.dto.response.CreateVOCResponse;
 import com.api.teamfresh.domain.constants.BlameType;
 import com.api.teamfresh.domain.entity.Carrier;
 import com.api.teamfresh.domain.entity.Claim;
@@ -31,15 +32,29 @@ public class VOCService {
     private final CustomerRepository customerRepository;
 
     @Transactional
-    public VOC createVOC(CreateVOC createVOC) {
+    public CreateVOCResponse createVOC(CreateVOC createVOC) {
 
         Claim claim = claimRepository.getById(createVOC.getClaimId());
 
-        Carrier carrier = handleCarrierAndDriver(createVOC);
+        Object[] carrierAndDriver = handleCarrierAndDriver(createVOC);
+        Carrier carrier = (Carrier) carrierAndDriver[0];
+        Driver driver = (Driver) carrierAndDriver[1];
+
         Customer customer = findOrSaveCustomer(createVOC);
         VOC voc = VOC.from(createVOC.getBlameType(), customer, carrier);
         VOC savedVoc = vocRepository.save(voc);
-        return savedVoc;
+        return CreateVOCResponse.of(savedVoc, carrier, driver, customer);
+    }
+
+    private Object[] handleCarrierAndDriver(CreateVOC createVOC) {
+        Object[] objects = new Object[2];
+        Carrier carrier = findOrSaveCarrier(createVOC);
+        Driver driver = findOrSaveDriver(createVOC);
+        driver.setCarrier(carrier);
+        driverRepository.save(driver);
+        objects[0] = carrier;
+        objects[1] = driver;
+        return objects;
     }
 
     private Customer findOrSaveCustomer(CreateVOC createVOC) {
@@ -50,14 +65,6 @@ public class VOCService {
                     return customerRepository.save(newCustomer);
                 });
         return customer;
-    }
-
-    private Carrier handleCarrierAndDriver(CreateVOC createVOC) {
-        Carrier carrier = findOrSaveCarrier(createVOC);
-        Driver driver = findOrSaveDriver(createVOC);
-        driver.setCarrier(carrier);
-        driverRepository.save(driver);
-        return carrier;
     }
 
     private Driver findOrSaveDriver(CreateVOC createVOC) {

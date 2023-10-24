@@ -1,6 +1,7 @@
 package com.api.teamfresh.controller;
 
 import com.api.teamfresh.controller.dto.request.CreateVOC;
+import com.api.teamfresh.controller.dto.response.CreateVOCResponse;
 import com.api.teamfresh.domain.constants.BlameType;
 import com.api.teamfresh.domain.entity.Claim;
 import com.api.teamfresh.domain.entity.VOC;
@@ -31,8 +32,8 @@ public class VOCController {
     }
 
     @PostMapping("/voc")
-    public ResponseEntity<VOC> createVOC(@RequestBody final CreateVOC createVOC) {
-        VOC voc = vocService.createVOC(createVOC);
+    public ResponseEntity<CreateVOCResponse> createVOC(@RequestBody final CreateVOC createVOC) {
+        CreateVOCResponse voc = vocService.createVOC(createVOC);
         return ResponseEntity.status(HttpStatus.CREATED).body(voc);
     }
 }

@@ -12,11 +12,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * 운송사 Entity
  */
+@Data
 @NoArgsConstructor
 @Entity
 public class Carrier {
