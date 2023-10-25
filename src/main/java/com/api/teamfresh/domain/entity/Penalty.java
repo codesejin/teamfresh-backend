@@ -42,7 +42,7 @@ public class Penalty extends BaseTimeEntity {
     private Objection objection;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "objection_status", columnDefinition = "VARCHAR(15) DEFAULT '이의 제기 없음'")
+    @Column(name = "objection_status", columnDefinition = "VARCHAR(30) DEFAULT '이의 제기 없음'")
     private ObjectionStatus objectionStatus; // 이의 제기 여부
 
     private Penalty(Driver driver, Float penaltyAmount) {
@@ -60,7 +60,9 @@ public class Penalty extends BaseTimeEntity {
         this.confirmedByDriver=true;
     }
 
-    public void rejectConfirmationByDriver() {
+    public void rejectConfirmationByDriver(Objection objection) {
         this.confirmedByDriver=false;
+        this.objectionStatus = ObjectionStatus.OBJECTION_RAISED;
+        this.objection = objection;
     }
 }

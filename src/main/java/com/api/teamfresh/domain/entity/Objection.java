@@ -9,10 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.NoArgsConstructor;
 
 /**
  * 이의제기 Entity
  */
+@NoArgsConstructor
 @Entity
 public class Objection extends BaseTimeEntity {
     @Id
@@ -25,4 +27,12 @@ public class Objection extends BaseTimeEntity {
 
     @Column
     private String content;
+
+    private Objection(Penalty penalty, String content) {
+        this.penalty = penalty;
+        this.content = content;
+    }
+    public static Objection of(Penalty penalty, String content) {
+        return new Objection(penalty, content);
+    }
 }
