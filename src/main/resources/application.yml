@@ -8,9 +8,9 @@ server:
 
   logging:
   level:
-    com.com.example.projectboard: debug  # ????? ?? ??? ???? ??
-    org.springframework.web.servlet: debug # Spring? ? ??? ?? ??? ???? ??
-    org.hibernate.type.descriptor.sql.BasicBinder: trace  # Hibernate? SQL ??? ?? ??? ????? ??
+    com.com.example.projectboard: debug  # 프로젝트의 로깅 레벨을 디버그로 설정
+    org.springframework.web.servlet: debug # Spring의 웹 서블릿 로깅 레벨을 디버그로 설정
+    org.hibernate.type.descriptor.sql.BasicBinder: trace  # Hibernate의 SQL 바인딩 로깅 레벨을 트레이스로 설정
 
 spring:
   datasource:
@@ -19,14 +19,14 @@ spring:
     password: 1234
 
   jpa:
-    open-in-view: true  # ?? ??? ? ???? ????? ??
-    defer-datasource-initialization: true  # ???? ????
+    open-in-view: true  # 지연 로딩이 뷰 외부에서 발생하도록 설정
+    defer-datasource-initialization: true  # 초기화를 지연시킴
     hibernate:
-      ddl-auto: create  # ?? ?????? ?????? ???? ?? ??
-      show-sql: true   # ???? SQL ??? ??
-      format_sql: true  # SQL ??? ????? ??? ??
+      ddl-auto: create  # 서버 실행할때마다 데이터베이스 스키마를 새로 생성
+      show-sql: true   # 실행되는 SQL 쿼리를 출력
+      format_sql: true  # SQL 문장을 포맷팅하여 가독성 향상
       properties:
-        '[hibernate.default_batch_fetch_size]': 100 # ?? ?? ???? ?? ??
+        '[hibernate.default_batch_fetch_size]': 100 # 배치 크기 설정으로 성능 향상
         '[hibernate.format_sql]': true
       output:
         ansi:
@@ -34,4 +34,4 @@ spring:
 
   sql:
     init:
-      mode: always # sql insert? ?? ??
+      mode: always # sql insert문 쿼리 삽입
