@@ -2,14 +2,11 @@ package com.api.teamfresh.service;
 
 import com.api.teamfresh.controller.dto.request.CreateVOC;
 import com.api.teamfresh.controller.dto.response.CreateVOCResponse;
-import com.api.teamfresh.domain.constants.BlameType;
 import com.api.teamfresh.domain.entity.Carrier;
-import com.api.teamfresh.domain.entity.Claim;
 import com.api.teamfresh.domain.entity.Customer;
 import com.api.teamfresh.domain.entity.Driver;
 import com.api.teamfresh.domain.entity.VOC;
 import com.api.teamfresh.domain.repository.CarrierRepository;
-import com.api.teamfresh.domain.repository.ClaimRepository;
 import com.api.teamfresh.domain.repository.CustomerRepository;
 import com.api.teamfresh.domain.repository.DriverRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
@@ -21,8 +18,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class VOCService {
 
-    private final ClaimRepository claimRepository;
-
     private final DriverRepository driverRepository;
 
     private final CarrierRepository carrierRepository;
@@ -33,15 +28,11 @@ public class VOCService {
 
     @Transactional
     public CreateVOCResponse createVOC(CreateVOC createVOC) {
-
-        Claim claim = claimRepository.getById(createVOC.getClaimId());
-
         Object[] carrierAndDriver = handleCarrierAndDriver(createVOC);
         Carrier carrier = (Carrier) carrierAndDriver[0];
         Driver driver = (Driver) carrierAndDriver[1];
-
         Customer customer = findOrSaveCustomer(createVOC);
-        VOC voc = VOC.from(createVOC.getBlameType(), customer, carrier);
+        VOC voc = VOC.from(createVOC.getBlameType(), createVOC.getContent(), createVOC.getEntryType(), customer, carrier);
         VOC savedVoc = vocRepository.save(voc);
         return CreateVOCResponse.of(savedVoc, carrier, driver, customer);
     }

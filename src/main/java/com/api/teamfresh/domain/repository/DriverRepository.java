@@ -1,12 +1,9 @@
 package com.api.teamfresh.domain.repository;
 
 
-import static com.api.teamfresh.exception.util.ErrorMessages.NOT_FOUND_CLAIM;
 import static com.api.teamfresh.exception.util.ErrorMessages.NOT_FOUND_DRIVER;
 
-import com.api.teamfresh.domain.entity.Claim;
 import com.api.teamfresh.domain.entity.Driver;
-import com.api.teamfresh.exception.ClaimNotFoundException;
 import com.api.teamfresh.exception.DriverNotFoundException;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

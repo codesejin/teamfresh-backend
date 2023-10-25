@@ -2,6 +2,9 @@ package com.api.teamfresh.domain.entity;
 
 
 import com.api.teamfresh.domain.constants.BlameType;
+import com.api.teamfresh.domain.constants.ClaimEntryType;
+import com.api.teamfresh.domain.constants.ClaimStatus;
+import com.api.teamfresh.domain.constants.VOCContent;
 import com.api.teamfresh.util.BaseTimeEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,8 +33,17 @@ public class VOC extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Claim claim;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "claim_status")
+    private ClaimStatus claimStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "voc_content")
+    private VOCContent vocContent;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "claim_entry_type")
+    private ClaimEntryType claimEntryType;
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -48,12 +60,17 @@ public class VOC extends BaseTimeEntity {
     @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
     private Compensation compensation;
 
-    private VOC(BlameType blameType, Customer customer, Carrier carrier) {
+    private VOC(BlameType blameType, VOCContent content, ClaimEntryType claimEntryType, Customer customer,
+                Carrier carrier) {
+        this.claimStatus = ClaimStatus.INCOMING;
+        this.vocContent = content;
+        this.claimEntryType = claimEntryType;
         this.blameType = blameType;
         this.customer = customer;
         this.carrier = carrier;
     }
-    public static VOC from(BlameType blameType, Customer customer, Carrier carrier) {
-        return new VOC(blameType ,customer, carrier);
+
+    public static VOC from(BlameType blameType, VOCContent content, ClaimEntryType claimEntryType, Customer customer, Carrier carrier) {
+        return new VOC(blameType,content, claimEntryType,customer, carrier);
     }
 }
