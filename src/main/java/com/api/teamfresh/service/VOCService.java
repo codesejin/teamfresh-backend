@@ -45,52 +45,48 @@ public class VOCService {
         Carrier carrier = (Carrier) carrierAndDriver[0];
         Driver driver = (Driver) carrierAndDriver[1];
         Customer customer = findOrSaveCustomer(createVOC);
-        VOC voc = VOC.from(createVOC.getBlameType(), createVOC.getContent(), createVOC.getEntryType(), customer,
-                carrier);
+
+        VOC voc = VOC.from(createVOC.getBlameType(), createVOC.getContent(), createVOC.getEntryType(), customer, carrier);
         VOC savedVoc = vocRepository.save(voc);
+
         return CreateVOCResponse.of(savedVoc, carrier, driver, customer);
     }
 
     private Object[] handleCarrierAndDriver(CreateVOC createVOC) {
-        Object[] objects = new Object[2];
         Carrier carrier = findOrSaveCarrier(createVOC);
         Driver driver = findOrSaveDriver(createVOC);
         driver.setCarrier(carrier);
         driverRepository.save(driver);
-        objects[0] = carrier;
-        objects[1] = driver;
-        return objects;
+
+        return new Object[]{carrier, driver};
     }
 
     private Customer findOrSaveCustomer(CreateVOC createVOC) {
-        Customer customer = customerRepository.findByNameAndContactPerson(createVOC.getCustomerName(),
-                        createVOC.getContactPerson())
+        return customerRepository
+                .findByNameAndContactPerson(createVOC.getCustomerName(), createVOC.getContactPerson())
                 .orElseGet(() -> {
-                    Customer newCustomer = Customer.from(createVOC.getCustomerName(), createVOC.getContactPerson(),
-                            createVOC.getContactNumber());
+                    Customer newCustomer = Customer.from(createVOC.getCustomerName(), createVOC.getContactPerson(), createVOC.getContactNumber());
                     return customerRepository.save(newCustomer);
                 });
-        return customer;
     }
 
     private Driver findOrSaveDriver(CreateVOC createVOC) {
-        Driver driver = driverRepository.findByNameAndPhoneNumber(createVOC.getDriverName(),
-                        createVOC.getDriverPhoneNumber())
+        return driverRepository
+                .findByNameAndPhoneNumber(createVOC.getDriverName(), createVOC.getDriverPhoneNumber())
                 .orElseGet(() -> {
-                    // 운전기사가 존재하지 않을 경우, 신규 저장
                     Driver newDriver = Driver.from(createVOC.getDriverName(), createVOC.getDriverPhoneNumber());
-                    return driverRepository.save(newDriver);
+                    driverRepository.save(newDriver);
+                    return newDriver;
                 });
-        return driver;
     }
 
     private Carrier findOrSaveCarrier(CreateVOC createVOC) {
-        Carrier carrier = carrierRepository.findByCarrierName(createVOC.getCarrierName())
+        return carrierRepository
+                .findByCarrierName(createVOC.getCarrierName())
                 .orElseGet(() -> {
-                    // 운송사가 존재하지 않을 경우, 신규 저장
                     Carrier newCarrier = Carrier.from(createVOC.getCarrierName());
-                    return carrierRepository.save(newCarrier);
+                    carrierRepository.save(newCarrier);
+                    return newCarrier;
                 });
-        return carrier;
     }
 }
