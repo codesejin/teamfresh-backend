@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class CreatePenaltyResponse {
-    private long id;
+    private long penaltyId;
     private String driverName;
 
     private String driverPhoneNumber;
@@ -15,7 +15,7 @@ public class CreatePenaltyResponse {
     private boolean confirmedByDriver;
     private String objectionStatus;
     private CreatePenaltyResponse(Penalty penalty) {
-        this.id = penalty.getId();
+        this.penaltyId = penalty.getId();
         this.driverName = penalty.getDriver().getName();
         this.driverPhoneNumber = penalty.getDriver().getPhoneNumber();
         this.penaltyAmount = penalty.getPenaltyAmount();
