@@ -3,8 +3,10 @@ package com.api.teamfresh.controller.dto.response;
 import com.api.teamfresh.domain.constants.ObjectionStatus;
 import com.api.teamfresh.domain.entity.Penalty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class CreatePenaltyResponse {
     private long penaltyId;
     private String driverName;

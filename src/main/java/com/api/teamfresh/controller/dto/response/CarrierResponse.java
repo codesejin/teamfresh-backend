@@ -4,8 +4,10 @@ import com.api.teamfresh.domain.constants.CarrierName;
 import com.api.teamfresh.domain.entity.Carrier;
 import com.api.teamfresh.domain.entity.Driver;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class CarrierResponse {
     private long id;
     private CarrierName carrierName;
