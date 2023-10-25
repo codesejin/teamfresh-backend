@@ -14,12 +14,11 @@ public class ConfirmPenaltyRequest {
     private ObjectionStatus objectionStatus;
     private String content;
 
-    public boolean verifyConfirmed() {
+    public void verifyConfirmed() {
         if (!isConfirmed()) {
             if (objectionStatus == null || content == null) {
                 throw new PenaltyBadRequestException(CHECK_OBJECTION_WITH_PENALTY);
             }
         }
-        return true;
     }
 }
