@@ -63,6 +63,7 @@ public class Penalty extends BaseTimeEntity {
 
     public void confirmByDriver() {
         this.confirmedByDriver=true;
+        this.objectionStatus = ObjectionStatus.NO_OBJECTION;
     }
 
     public void rejectConfirmationByDriver(Objection objection) {
