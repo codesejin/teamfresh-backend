@@ -60,3 +60,28 @@ refactor : 로직을 변경하지 않으면서 코드 품질을 향상시키는 
 ### [Postman API docs](https://documenter.getpostman.com/view/19993324/2s9YRE1qq9)
 ![image](https://github.com/codesejin/teamfresh-backend/assets/101460733/b8ccf9c1-3c2c-4b7f-ad5b-8f2e98f725e7)
 
+
+## 스프링 서버 시작 시 SQL 삽입 쿼리문 자동 실행
+```sql
+-- sql
+INSERT INTO carrier (carrier_name)
+VALUES ('CJ_LOGISTICS'),
+       ('LOTTE_LOGISTICS'),
+       ('HYUNDAI_LOGISTICS'),
+       ('DHL'),
+       ('KOREA_POST');
+INSERT INTO customer (contact_number, contact_person, name)
+VALUES ('John Doe','123-456-7890','ABC Company'),
+       ('John','123-456-7890','choco Company'),
+       ('Doe','123-456-7890','teamteam'),
+       ('park','123-456-7890','rocket fresh'),
+       ('seijin','123-456-7890','coupang');
+INSERT INTO voc
+(blame_type, voc_content, created_at, updated_at, claim_entry_type, claim_status, customer_id, carrier_id, is_compensation_requested)
+VALUES ('CARRIER', 'WRONG_DELIVERY_LOCATION', CURRENT_TIMESTAMP(6),CURRENT_TIMESTAMP(6),'KAKAOTALK','INCOMING',1,1,false),
+       ('CUSTOMER', 'DAMAGED_ITEM', CURRENT_TIMESTAMP(6),NOW(6),'NAVER_TALK','INCOMING',1,2,false),
+       ('CARRIER', 'DELAYED_DELIVERY', CURRENT_TIMESTAMP(6),CURRENT_TIMESTAMP(6),'PHONE','INCOMING',2,3,false),
+       ('CUSTOMER', 'MISSING_ITEM', CURRENT_TIMESTAMP(6),NOW(6),'KAKAOTALK','INCOMING',2,4,false),
+       ('CARRIER', 'DELAYED_DELIVERY', CURRENT_TIMESTAMP(6),CURRENT_TIMESTAMP(6),'PHONE','INCOMING',3,5,false);
+```
+
