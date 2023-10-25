@@ -42,12 +42,12 @@ public class PenaltyService {
     public String confirmPenalty(Long penaltyId, ConfirmPenaltyRequest confirmPenaltyRequest) {
         Penalty penalty = penaltyRepository.getById(penaltyId);
         // 기사가 승인할 경우
-        if (confirmPenaltyRequest.isConfirmed()){
+        if (confirmPenaltyRequest.isConfirmed()) {
             return acceptedPenalty(penalty);
-        // 이의 제기할 경우
-        } else {
-            return rejectedPenalty(confirmPenaltyRequest, penalty);
         }
+        // 이의 제기할 경우
+        return rejectedPenalty(confirmPenaltyRequest, penalty);
+
     }
 
     private static String acceptedPenalty(Penalty penalty) {
