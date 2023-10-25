@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.security.PublicKey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -43,5 +44,9 @@ public class Driver {
 
     public void setCarrier(Carrier carrier) {
         this.carrier = carrier;
+    }
+
+    public void addMonthlyPenalty(Float monthlyPenalty) {
+        this.monthlyPenalty += monthlyPenalty;
     }
 }
