@@ -52,7 +52,7 @@ public class PenaltyService {
     }
 
     private String rejectedPenalty(ConfirmPenaltyRequest confirmPenaltyRequest, Penalty penalty) {
-        confirmPenaltyRequest.checkConfirmed();
+        confirmPenaltyRequest.verifyConfirmed();
         Objection saveObjection =
                 objectionRepository.save(Objection.of(penalty, confirmPenaltyRequest.getContent()));
         penalty.rejectConfirmationByDriver(saveObjection);

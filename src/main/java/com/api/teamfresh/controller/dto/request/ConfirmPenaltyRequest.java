@@ -14,11 +14,7 @@ public class ConfirmPenaltyRequest {
     private ObjectionStatus objectionStatus;
     private String content;
 
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public boolean checkConfirmed() {
+    public boolean verifyConfirmed() {
         if (!isConfirmed()) {
             if (objectionStatus == null || content == null) {
                 throw new PenaltyBadRequestException(CHECK_OBJECTION_WITH_PENALTY);
