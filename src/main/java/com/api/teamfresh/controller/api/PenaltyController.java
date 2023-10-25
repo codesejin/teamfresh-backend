@@ -16,20 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/penalty")
 @RestController
 public class PenaltyController {
     private final PenaltyService penaltyService;
 
     // 패널티 등록
-    @PostMapping("/penalty")
+    @PostMapping()
     public ResponseEntity<CreatePenaltyResponse> createPenalty(@RequestBody final CreatePenaltyRequest createPenaltyRequest) {
         CreatePenaltyResponse penalty = penaltyService.createPenalty(createPenaltyRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(penalty);
     }
 
     // 배송기사의 패널티 확인 여부 등록 및 이의제기 등록
-    @PutMapping("/penalty/{penaltyId}/confirm")
+    @PutMapping("/{penaltyId}/confirm")
     public ResponseEntity<APIResponse> confirmPenalty(@PathVariable("penaltyId") Long penaltyId,
                                                       @RequestBody final ConfirmPenaltyRequest confirmPenaltyRequest) {
         String result = penaltyService.confirmPenalty(penaltyId, confirmPenaltyRequest);

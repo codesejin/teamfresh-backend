@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/compensation")
 @RestController
 public class CompensationController {
     private final CompensationService compensationService;
 
     // 배상 전체 목록 API
-    @GetMapping("/compensation")
+    @GetMapping()
     public ResponseEntity<List<CompensationResponse>> getAllCompensations() {
         return ResponseEntity.status(HttpStatus.OK).body(compensationService.getAllCompensations());
     }
 
     // 배상 시스템 등록
-    @PostMapping("/compensation/{vocId}")
+    @PostMapping("/{vocId}")
     public ResponseEntity<APIResponse> createCompensation(@PathVariable long vocId,
                                                           @RequestParam long penaltyId) {
         String result = compensationService.createCompensation(vocId, penaltyId);
