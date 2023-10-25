@@ -13,6 +13,7 @@ import com.api.teamfresh.util.Messages;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,13 +28,12 @@ public class CompensationService {
     // 배상 전체 목록 조회
     public List<CompensationResponse> getAllCompensations() {
         List<Compensation> compensations = compensationRepository.findAll();
-        List<CompensationResponse> response = new ArrayList<>();
-        for (Compensation x : compensations) {
-            CompensationResponse compensationResponse = CompensationResponse.of(x);
-            response.add(compensationResponse);
-        }
-        return response;
+
+        return compensations.stream()
+                .map(CompensationResponse::of)
+                .collect(Collectors.toList());
     }
+
 
     // 배상 등록
     @Transactional
