@@ -34,6 +34,11 @@ style : 코드 포멧팅 (코드의 들여쓰기, 공백, 줄바꿈, 변수 및 
 test : 테스트 추가
 refactor : 로직을 변경하지 않으면서 코드 품질을 향상시키는 작업(변수명, 매직넘버, 함수 재사용성 높이기, 불필요한 중첩 제거)
 ```
+
+## 요구 사항 정리
+### [Issue #1](https://github.com/codesejin/teamfresh-backend/issues/1#issue-1959256285)  
+<img width="482" alt="image" src="https://github.com/codesejin/teamfresh-backend/assets/101460733/b35e8492-bab5-4291-ba09-d911d48f33ef">
+
   
 ## 테이블 스키마
 ![image](https://github.com/codesejin/teamfresh-backend/assets/101460733/95321df0-339e-40fb-ae75-91e0ad8aff6d)
@@ -47,3 +52,4 @@ refactor : 로직을 변경하지 않으면서 코드 품질을 향상시키는 
 
 ### [Postman API docs](https://documenter.getpostman.com/view/19993324/2s9YRE1qq9)
 ![image](https://github.com/codesejin/teamfresh-backend/assets/101460733/b8ccf9c1-3c2c-4b7f-ad5b-8f2e98f725e7)
+
