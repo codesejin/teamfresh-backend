@@ -31,3 +31,9 @@ TDD, 도커, 프론트 등 다양한 관점에서 과제를 해보면 좋았을 
 
 ## 클래스 다이어그램
 ![image](https://github.com/codesejin/teamfresh-backend/assets/101460733/1aa1fd3d-fec9-4402-b236-e7a875584e36)
+
+
+## API 문서
+
+### [Postman API docs](https://documenter.getpostman.com/view/19993324/2s9YRE1qq9)
+![image](https://github.com/codesejin/teamfresh-backend/assets/101460733/b8ccf9c1-3c2c-4b7f-ad5b-8f2e98f725e7)
