@@ -4,6 +4,7 @@ import com.api.teamfresh.controller.dto.request.ConfirmPenaltyRequest;
 import com.api.teamfresh.controller.dto.request.CreatePenaltyRequest;
 import com.api.teamfresh.controller.dto.response.CreatePenaltyResponse;
 import com.api.teamfresh.service.PenaltyService;
+import com.api.teamfresh.util.APIResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +30,9 @@ public class PenaltyController {
 
     // 배송기사의 패널티 확인 여부 등록 및 이의제기 등록
     @PutMapping("/penalty/{penaltyId}/confirm")
-    public ResponseEntity<String> confirmPenalty(@PathVariable("penaltyId") Long penaltyId,
-                                           @RequestBody final ConfirmPenaltyRequest confirmPenaltyRequest) {
-        String string = penaltyService.confirmPenalty(penaltyId, confirmPenaltyRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(string);
+    public ResponseEntity<APIResponse> confirmPenalty(@PathVariable("penaltyId") Long penaltyId,
+                                                      @RequestBody final ConfirmPenaltyRequest confirmPenaltyRequest) {
+        String result = penaltyService.confirmPenalty(penaltyId, confirmPenaltyRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(APIResponse.of(201,result));
     }
 }

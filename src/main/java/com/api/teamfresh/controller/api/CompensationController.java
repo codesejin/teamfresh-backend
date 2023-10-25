@@ -2,6 +2,7 @@ package com.api.teamfresh.controller.api;
 
 import com.api.teamfresh.controller.dto.response.CompensationResponse;
 import com.api.teamfresh.service.CompensationService;
+import com.api.teamfresh.util.APIResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,9 @@ public class CompensationController {
 
     // 배상 시스템 등록
     @PostMapping("/compensation/{vocId}")
-    public ResponseEntity<String> createCompensation(@PathVariable long vocId,
-                                                     @RequestParam long penaltyId) {
-        String compensation = compensationService.createCompensation(vocId, penaltyId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(compensation);
+    public ResponseEntity<APIResponse> createCompensation(@PathVariable long vocId,
+                                                          @RequestParam long penaltyId) {
+        String result = compensationService.createCompensation(vocId, penaltyId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(APIResponse.of(201,result));
     }
 }
