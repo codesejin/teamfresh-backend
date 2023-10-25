@@ -49,16 +49,19 @@ public class VOC extends BaseTimeEntity {
     @Column
     private BlameType blameType;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "carrier_id")
     private Carrier carrier;
 
     @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
     private Compensation compensation;
+
+    @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Penalty penalty;
 
     private VOC(BlameType blameType, VOCContent content, ClaimEntryType claimEntryType, Customer customer,
                 Carrier carrier) {

@@ -1,6 +1,7 @@
 package com.api.teamfresh.service;
 
 import com.api.teamfresh.controller.dto.request.CreateVOC;
+import com.api.teamfresh.controller.dto.response.voc.AllVOCResponse;
 import com.api.teamfresh.controller.dto.response.voc.CreateVOCResponse;
 import com.api.teamfresh.domain.entity.Carrier;
 import com.api.teamfresh.domain.entity.Customer;
@@ -9,10 +10,13 @@ import com.api.teamfresh.domain.entity.VOC;
 import com.api.teamfresh.domain.repository.CarrierRepository;
 import com.api.teamfresh.domain.repository.CustomerRepository;
 import com.api.teamfresh.domain.repository.DriverRepository;
+import com.api.teamfresh.domain.repository.PenaltyRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
-import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -26,13 +30,29 @@ public class VOCService {
 
     private final CustomerRepository customerRepository;
 
+    // voc 전체 목록 조회
+    @Transactional
+    public List<AllVOCResponse> getAllVOC() {
+        List<VOC> vocs = vocRepository.findAll();
+        List<AllVOCResponse> response = new ArrayList<>();
+        for (VOC x : vocs) {
+            AllVOCResponse allVOCResponse = AllVOCResponse.of(x);
+            response.add(allVOCResponse);
+        }
+        System.out.println("vocs : " + vocs);
+        System.out.println("reponse : " + response);
+        return response;
+    }
+
+    // voc 등록
     @Transactional
     public CreateVOCResponse createVOC(CreateVOC createVOC) {
         Object[] carrierAndDriver = handleCarrierAndDriver(createVOC);
         Carrier carrier = (Carrier) carrierAndDriver[0];
         Driver driver = (Driver) carrierAndDriver[1];
         Customer customer = findOrSaveCustomer(createVOC);
-        VOC voc = VOC.from(createVOC.getBlameType(), createVOC.getContent(), createVOC.getEntryType(), customer, carrier);
+        VOC voc = VOC.from(createVOC.getBlameType(), createVOC.getContent(), createVOC.getEntryType(), customer,
+                carrier);
         VOC savedVoc = vocRepository.save(voc);
         return CreateVOCResponse.of(savedVoc, carrier, driver, customer);
     }
@@ -49,7 +69,8 @@ public class VOCService {
     }
 
     private Customer findOrSaveCustomer(CreateVOC createVOC) {
-        Customer customer = customerRepository.findByNameAndContactPerson(createVOC.getCustomerName(), createVOC.getContactPerson())
+        Customer customer = customerRepository.findByNameAndContactPerson(createVOC.getCustomerName(),
+                        createVOC.getContactPerson())
                 .orElseGet(() -> {
                     Customer newCustomer = Customer.from(createVOC.getCustomerName(), createVOC.getContactPerson(),
                             createVOC.getContactNumber());

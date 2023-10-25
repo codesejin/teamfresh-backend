@@ -11,6 +11,7 @@ public class CarrierResponse {
     private CarrierName carrierName;
     private String DriverName;
     private String DriverPhoneNumber;
+
     public CarrierResponse(Carrier carrier, Driver driver) {
         this.id = carrier.getId();
         this.carrierName = carrier.getCarrierName();
@@ -18,7 +19,16 @@ public class CarrierResponse {
         this.DriverPhoneNumber = driver.getPhoneNumber();
     }
 
+    public CarrierResponse(Carrier carrier) {
+        this.id = carrier.getId();
+        this.carrierName = carrier.getCarrierName();
+    }
+
     public static CarrierResponse of(Carrier carrier, Driver driver) {
         return new CarrierResponse(carrier, driver);
+    }
+
+    public static CarrierResponse createOnlyCarrierInfo(Carrier carrier) {
+        return new CarrierResponse(carrier);
     }
 }

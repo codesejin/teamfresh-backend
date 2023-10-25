@@ -13,9 +13,9 @@ import com.api.teamfresh.domain.repository.ObjectionRepository;
 import com.api.teamfresh.domain.repository.PenaltyRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
 import com.api.teamfresh.util.Messages;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -34,7 +34,7 @@ public class PenaltyService {
         Driver driver = driverRepository.getByNameAndPhoneNumber(vocByDriverName.getDriverName(),
                 vocByDriverName.getDriverPhoneNumber());
         Penalty savedPenalty =
-                penaltyRepository.save(Penalty.of(driver, penaltyRequest.getPenaltyAmount()));
+                penaltyRepository.save(Penalty.of(voc, driver, penaltyRequest.getPenaltyAmount()));
         return CreatePenaltyResponse.of(savedPenalty);
     }
 

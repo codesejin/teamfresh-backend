@@ -30,8 +30,9 @@ public class Carrier {
     @OneToMany(mappedBy="carrier", cascade= CascadeType.ALL, orphanRemoval=true)
     private List<VOC> vocs;
 
-    @OneToMany(mappedBy = "carrier", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "carrier", fetch = FetchType.LAZY)
     private List<Driver> driver;
+
     @Enumerated(EnumType.STRING)
     @Column
     private CarrierName carrierName; // 운송사 이름

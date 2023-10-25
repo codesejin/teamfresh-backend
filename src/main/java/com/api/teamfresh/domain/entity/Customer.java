@@ -24,6 +24,8 @@ public class Customer {
 
     @OneToMany(mappedBy="customer", cascade= CascadeType.ALL, orphanRemoval=true)
     private List<VOC> vocs;
+    @OneToMany(mappedBy="customer", cascade= CascadeType.ALL, orphanRemoval=true)
+    private List<Compensation> compensations;
     @Column
     private String name; // 고객사 이름
     @Column

@@ -28,6 +28,10 @@ public class Penalty extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="voc_id")
+    private VOC voc;
+
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="driver_id")
     private Driver driver;
@@ -45,15 +49,16 @@ public class Penalty extends BaseTimeEntity {
     @Column(name = "objection_status", columnDefinition = "VARCHAR(30) DEFAULT '이의 제기 없음'")
     private ObjectionStatus objectionStatus; // 이의 제기 여부
 
-    private Penalty(Driver driver, Float penaltyAmount) {
+    private Penalty(VOC voc, Driver driver, Float penaltyAmount) {
+        this.voc = voc;
         this.driver = driver;
         this.penaltyAmount = penaltyAmount;
         this.confirmedByDriver = false;
         this.objectionStatus = ObjectionStatus.NO_OBJECTION;
     }
 
-    public static Penalty of(Driver driver, Float penaltyAmount) {
-        return new Penalty(driver, penaltyAmount);
+    public static Penalty of(VOC voc, Driver driver, Float penaltyAmount) {
+        return new Penalty(voc, driver, penaltyAmount);
     }
 
     public void confirmByDriver() {
