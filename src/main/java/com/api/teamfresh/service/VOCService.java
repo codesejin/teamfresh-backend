@@ -1,6 +1,6 @@
 package com.api.teamfresh.service;
 
-import com.api.teamfresh.controller.dto.request.CreateVOC;
+import com.api.teamfresh.controller.dto.request.CreateVOCRequest;
 import com.api.teamfresh.controller.dto.response.voc.AllVOCResponse;
 import com.api.teamfresh.controller.dto.response.voc.CreateVOCResponse;
 import com.api.teamfresh.domain.entity.Carrier;
@@ -40,51 +40,51 @@ public class VOCService {
 
     // voc 등록
     @Transactional
-    public CreateVOCResponse createVOC(CreateVOC createVOC) {
-        Object[] carrierAndDriver = handleCarrierAndDriver(createVOC);
+    public CreateVOCResponse createVOC(CreateVOCRequest createVOCRequest) {
+        Object[] carrierAndDriver = handleCarrierAndDriver(createVOCRequest);
         Carrier carrier = (Carrier) carrierAndDriver[0];
         Driver driver = (Driver) carrierAndDriver[1];
-        Customer customer = findOrSaveCustomer(createVOC);
+        Customer customer = findOrSaveCustomer(createVOCRequest);
 
-        VOC voc = VOC.from(createVOC.getBlameType(), createVOC.getContent(), createVOC.getEntryType(), customer, carrier);
+        VOC voc = VOC.from(createVOCRequest.getBlameType(), createVOCRequest.getContent(), createVOCRequest.getEntryType(), customer, carrier);
         VOC savedVoc = vocRepository.save(voc);
 
         return CreateVOCResponse.of(savedVoc, carrier, driver, customer);
     }
 
-    private Object[] handleCarrierAndDriver(CreateVOC createVOC) {
-        Carrier carrier = findOrSaveCarrier(createVOC);
-        Driver driver = findOrSaveDriver(createVOC);
+    private Object[] handleCarrierAndDriver(CreateVOCRequest createVOCRequest) {
+        Carrier carrier = findOrSaveCarrier(createVOCRequest);
+        Driver driver = findOrSaveDriver(createVOCRequest);
         driver.setCarrier(carrier);
         driverRepository.save(driver);
 
         return new Object[]{carrier, driver};
     }
 
-    private Customer findOrSaveCustomer(CreateVOC createVOC) {
+    private Customer findOrSaveCustomer(CreateVOCRequest createVOCRequest) {
         return customerRepository
-                .findByNameAndContactPerson(createVOC.getCustomerName(), createVOC.getContactPerson())
+                .findByNameAndContactPerson(createVOCRequest.getCustomerName(), createVOCRequest.getContactPerson())
                 .orElseGet(() -> {
-                    Customer newCustomer = Customer.from(createVOC.getCustomerName(), createVOC.getContactPerson(), createVOC.getContactNumber());
+                    Customer newCustomer = Customer.from(createVOCRequest.getCustomerName(), createVOCRequest.getContactPerson(), createVOCRequest.getContactNumber());
                     return customerRepository.save(newCustomer);
                 });
     }
 
-    private Driver findOrSaveDriver(CreateVOC createVOC) {
+    private Driver findOrSaveDriver(CreateVOCRequest createVOCRequest) {
         return driverRepository
-                .findByNameAndPhoneNumber(createVOC.getDriverName(), createVOC.getDriverPhoneNumber())
+                .findByNameAndPhoneNumber(createVOCRequest.getDriverName(), createVOCRequest.getDriverPhoneNumber())
                 .orElseGet(() -> {
-                    Driver newDriver = Driver.from(createVOC.getDriverName(), createVOC.getDriverPhoneNumber());
+                    Driver newDriver = Driver.from(createVOCRequest.getDriverName(), createVOCRequest.getDriverPhoneNumber());
                     driverRepository.save(newDriver);
                     return newDriver;
                 });
     }
 
-    private Carrier findOrSaveCarrier(CreateVOC createVOC) {
+    private Carrier findOrSaveCarrier(CreateVOCRequest createVOCRequest) {
         return carrierRepository
-                .findByCarrierName(createVOC.getCarrierName())
+                .findByCarrierName(createVOCRequest.getCarrierName())
                 .orElseGet(() -> {
-                    Carrier newCarrier = Carrier.from(createVOC.getCarrierName());
+                    Carrier newCarrier = Carrier.from(createVOCRequest.getCarrierName());
                     carrierRepository.save(newCarrier);
                     return newCarrier;
                 });

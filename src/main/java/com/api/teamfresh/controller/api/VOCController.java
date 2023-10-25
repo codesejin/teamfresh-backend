@@ -1,6 +1,6 @@
 package com.api.teamfresh.controller.api;
 
-import com.api.teamfresh.controller.dto.request.CreateVOC;
+import com.api.teamfresh.controller.dto.request.CreateVOCRequest;
 import com.api.teamfresh.controller.dto.response.voc.AllVOCResponse;
 import com.api.teamfresh.controller.dto.response.voc.CreateVOCResponse;
 import com.api.teamfresh.service.VOCService;
@@ -29,8 +29,8 @@ public class VOCController {
 
     // voc 등록
     @PostMapping("/voc")
-    public ResponseEntity<CreateVOCResponse> createVOC(@RequestBody final CreateVOC createVOC) {
-        CreateVOCResponse voc = vocService.createVOC(createVOC);
+    public ResponseEntity<CreateVOCResponse> createVOC(@RequestBody final CreateVOCRequest createVOCRequest) {
+        CreateVOCResponse voc = vocService.createVOC(createVOCRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(voc);
     }
 
