@@ -44,7 +44,8 @@ refactor : 로직을 변경하지 않으면서 코드 품질을 향상시키는 
 
 ## 요구 사항 정리
 ### [Issue #1](https://github.com/codesejin/teamfresh-backend/issues/1#issue-1959256285)  
-<img width="482" alt="image" src="https://github.com/codesejin/teamfresh-backend/assets/101460733/b35e8492-bab5-4291-ba09-d911d48f33ef">
+![image](https://github.com/codesejin/teamfresh-backend/assets/101460733/04f67a53-f612-4892-a251-de7eddb37ac2)
+
 
   
 ## 테이블 스키마
