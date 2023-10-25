@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CompensationController {
     private final CompensationService compensationService;
 
+    // 배상 시스템 등록
     @PostMapping("/compensation/{vocId}")
     public ResponseEntity<String> createCompensation(@PathVariable long vocId,
                                                      @RequestParam long penaltyId) {

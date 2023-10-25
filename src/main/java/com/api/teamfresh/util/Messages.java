@@ -1,4 +1,4 @@
-package com.api.teamfresh.exception.util;
+package com.api.teamfresh.util;
 
 public enum Messages {
     CONFIRMED("기사님이 승인하셨습니다."),
