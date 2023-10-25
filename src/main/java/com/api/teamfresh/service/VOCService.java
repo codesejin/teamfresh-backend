@@ -1,7 +1,7 @@
 package com.api.teamfresh.service;
 
 import com.api.teamfresh.controller.dto.request.CreateVOC;
-import com.api.teamfresh.controller.dto.response.CreateVOCResponse;
+import com.api.teamfresh.controller.dto.response.voc.CreateVOCResponse;
 import com.api.teamfresh.domain.entity.Carrier;
 import com.api.teamfresh.domain.entity.Customer;
 import com.api.teamfresh.domain.entity.Driver;

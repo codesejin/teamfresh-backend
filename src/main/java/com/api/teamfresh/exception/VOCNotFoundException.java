@@ -2,15 +2,15 @@ package com.api.teamfresh.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class DriverNotFoundException extends RuntimeException {
+public class VOCNotFoundException  extends RuntimeException {
 
     private final HttpStatus httpStatus;
 
-    public DriverNotFoundException(String message) {
+    public VOCNotFoundException(String message) {
         this(message, HttpStatus.NOT_FOUND);
     }
 
-    public DriverNotFoundException(String message, HttpStatus httpStatus) {
+    public VOCNotFoundException(String message, HttpStatus httpStatus) {
         super(message);
         this.httpStatus = httpStatus;
     }

@@ -1,8 +1,8 @@
-package com.api.teamfresh.controller.dto.response;
+package com.api.teamfresh.controller.dto.response.voc;
 
+import com.api.teamfresh.controller.dto.response.CarrierResponse;
+import com.api.teamfresh.controller.dto.response.CustomerResponse;
 import com.api.teamfresh.domain.constants.BlameType;
-import com.api.teamfresh.domain.constants.ClaimEntryType;
-import com.api.teamfresh.domain.constants.VOCContent;
 import com.api.teamfresh.domain.entity.Carrier;
 import com.api.teamfresh.domain.entity.Customer;
 import com.api.teamfresh.domain.entity.Driver;

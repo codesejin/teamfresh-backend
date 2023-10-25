@@ -1,5 +1,7 @@
-package com.api.teamfresh.controller.dto.response;
+package com.api.teamfresh.controller.dto.response.voc;
 
+import com.api.teamfresh.controller.dto.response.CarrierResponse;
+import com.api.teamfresh.controller.dto.response.CustomerResponse;
 import com.api.teamfresh.domain.constants.BlameType;
 
 public class AllVOCResponse {
