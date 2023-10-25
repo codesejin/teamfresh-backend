@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PenaltyResponse {
     private long penaltyId;
-    private Driver driver;
+    private DriverResponse driver;
     private Float penaltyAmount;
     private boolean confirmedByDriver;
     // 이의 제기 여부 (이의 내용이 무엇인지는 요구사항에 없으므로 여부만 파악)
@@ -19,7 +19,7 @@ public class PenaltyResponse {
 
     private PenaltyResponse(Penalty penalty) {
         this.penaltyId = penalty.getId();
-        this.driver = penalty.getDriver();
+        this.driver = DriverResponse.of(penalty.getDriver());
         this.penaltyAmount = penalty.getPenaltyAmount();
         this.confirmedByDriver = penalty.isConfirmedByDriver();
         this.objectionStatus = penalty.getObjectionStatus(); //

@@ -11,7 +11,6 @@ import com.api.teamfresh.domain.repository.PenaltyRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
 import com.api.teamfresh.util.Messages;
 import jakarta.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,6 @@ public class CompensationService {
                 .map(CompensationResponse::of)
                 .collect(Collectors.toList());
     }
-
 
     // 배상 등록
     @Transactional

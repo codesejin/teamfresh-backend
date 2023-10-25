@@ -1,7 +1,6 @@
 package com.api.teamfresh.controller.dto.response;
 
 import com.api.teamfresh.domain.entity.Compensation;
-import com.api.teamfresh.domain.entity.Customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

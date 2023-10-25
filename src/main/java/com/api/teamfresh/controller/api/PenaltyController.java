@@ -1,4 +1,4 @@
-package com.api.teamfresh.controller;
+package com.api.teamfresh.controller.api;
 
 import com.api.teamfresh.controller.dto.request.ConfirmPenaltyRequest;
 import com.api.teamfresh.controller.dto.request.CreatePenaltyRequest;

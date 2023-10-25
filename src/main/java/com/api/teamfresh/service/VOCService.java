@@ -39,8 +39,6 @@ public class VOCService {
             AllVOCResponse allVOCResponse = AllVOCResponse.of(x);
             response.add(allVOCResponse);
         }
-        System.out.println("vocs : " + vocs);
-        System.out.println("reponse : " + response);
         return response;
     }
 
