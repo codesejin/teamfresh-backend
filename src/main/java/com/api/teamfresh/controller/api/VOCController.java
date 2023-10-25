@@ -24,8 +24,7 @@ public class VOCController {
     // voc 전체 목록
     @GetMapping("/voc")
     public ResponseEntity<List<AllVOCResponse>> getAllVOC() {
-        List<AllVOCResponse> allVOC = vocService.getAllVOC();
-        return ResponseEntity.status(HttpStatus.OK).body(allVOC);
+        return ResponseEntity.status(HttpStatus.OK).body(vocService.getAllVOC());
     }
 
     // voc 등록

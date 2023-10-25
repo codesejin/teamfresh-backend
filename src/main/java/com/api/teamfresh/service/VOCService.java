@@ -10,10 +10,9 @@ import com.api.teamfresh.domain.entity.VOC;
 import com.api.teamfresh.domain.repository.CarrierRepository;
 import com.api.teamfresh.domain.repository.CustomerRepository;
 import com.api.teamfresh.domain.repository.DriverRepository;
-import com.api.teamfresh.domain.repository.PenaltyRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,15 +30,12 @@ public class VOCService {
     private final CustomerRepository customerRepository;
 
     // voc 전체 목록 조회
-    @Transactional
     public List<AllVOCResponse> getAllVOC() {
         List<VOC> vocs = vocRepository.findAll();
-        List<AllVOCResponse> response = new ArrayList<>();
-        for (VOC x : vocs) {
-            AllVOCResponse allVOCResponse = AllVOCResponse.of(x);
-            response.add(allVOCResponse);
-        }
-        return response;
+
+        return vocs.stream()
+                .map(AllVOCResponse::of)
+                .collect(Collectors.toList());
     }
 
     // voc 등록
