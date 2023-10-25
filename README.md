@@ -26,9 +26,11 @@ TDD, 도커, 프론트 등 다양한 관점에서 과제를 해보면 좋았을 
 - 이번 과제를 하면서 `LazyInitializationException` 에러가 발생해서 2시간동안 고생했는데, 해당 문제는  지연 로딩(Lazy Loading) 관련 문제로 영속성 컨텍스트의 생명주기와 트랜잭션에 대해 배울 수 있었습니다.
 
 ## 기술 스택
-java 17.0.8
-Spring Boot 3.1.5
+```
+Java 17.0.8  
+Spring Boot 3.1.5  
 MySQL 8.1 (도커 이미지로 로컬에서 사용)
+```
 
 ## 커밋 컨벤션
 ```text
