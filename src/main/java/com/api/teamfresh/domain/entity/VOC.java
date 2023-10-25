@@ -63,6 +63,9 @@ public class VOC extends BaseTimeEntity {
     @OneToOne(mappedBy = "voc", cascade = CascadeType.ALL, orphanRemoval = true)
     private Penalty penalty;
 
+    @Column
+    private boolean isCompensationRequested;
+
     private VOC(BlameType blameType, VOCContent content, ClaimEntryType claimEntryType, Customer customer,
                 Carrier carrier) {
         this.claimStatus = ClaimStatus.INCOMING;
@@ -71,9 +74,14 @@ public class VOC extends BaseTimeEntity {
         this.blameType = blameType;
         this.customer = customer;
         this.carrier = carrier;
+        this.isCompensationRequested = false;
     }
 
     public static VOC from(BlameType blameType, VOCContent content, ClaimEntryType claimEntryType, Customer customer, Carrier carrier) {
         return new VOC(blameType,content, claimEntryType,customer, carrier);
+    }
+
+    public void updateCompensationRequested() {
+        this.isCompensationRequested = true;
     }
 }

@@ -37,12 +37,17 @@ public class CompensationService {
     @Transactional
     public String createCompensation(long vocId, long penaltyId) {
         VOC voc = vocRepository.getById(vocId);
-        Penalty penalty = penaltyRepository.getById(penaltyId);
-        // 배상 시스템 등록
-        createAndSaveCompensation(voc, penalty);
-        // 기사 월급에서 차감
-        deductDriverSalary(penalty);
-        return Messages.COMPENSATION_REGISTER.getMessage();
+        // 고객사가 배상 요청한 경우
+        if (voc.isCompensationRequested()) {
+            Penalty penalty = penaltyRepository.getById(penaltyId);
+            // 배상 시스템 등록
+            createAndSaveCompensation(voc, penalty);
+            // 기사 월급에서 차감
+            deductDriverSalary(penalty);
+            return Messages.COMPENSATION_REGISTER.getMessage();
+        }
+        // 고객사가 배상 요청 안한 경우
+        return Messages.COMPENSATION_NOT_REQUESTED.getMessage();
     }
 
     private void createAndSaveCompensation(VOC voc, Penalty penalty) {

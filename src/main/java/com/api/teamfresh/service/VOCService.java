@@ -11,6 +11,8 @@ import com.api.teamfresh.domain.repository.CarrierRepository;
 import com.api.teamfresh.domain.repository.CustomerRepository;
 import com.api.teamfresh.domain.repository.DriverRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
+import com.api.teamfresh.util.APIResponse;
+import com.api.teamfresh.util.Messages;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +52,15 @@ public class VOCService {
         VOC savedVoc = vocRepository.save(voc);
 
         return CreateVOCResponse.of(savedVoc, carrier, driver, customer);
+    }
+
+    // 고객사가 배상 요청 한 경우
+    @Transactional
+    public String updatedCompensationRequest(long vocId) {
+        VOC voc = vocRepository.getById(vocId);
+        voc.updateCompensationRequested();
+        vocRepository.save(voc);
+        return Messages.COMPENSATION_REQUESTED.getMessage();
     }
 
     private Object[] handleCarrierAndDriver(CreateVOCRequest createVOCRequest) {
