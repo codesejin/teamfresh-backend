@@ -12,7 +12,8 @@ import com.api.teamfresh.domain.repository.DriverRepository;
 import com.api.teamfresh.domain.repository.ObjectionRepository;
 import com.api.teamfresh.domain.repository.PenaltyRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
-import com.api.teamfresh.exception.util.PenaltyMessages;
+import com.api.teamfresh.exception.util.Messages;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class PenaltyService {
     private final DriverRepository driverRepository;
     private final PenaltyRepository penaltyRepository;
     private final ObjectionRepository objectionRepository;
+
+    @Transactional
     public CreatePenaltyResponse createPenalty(CreatePenaltyRequest penaltyRequest) {
         VOC voc = vocRepository.getById(penaltyRequest.getVocId());
         FindVOCByDriverName vocByDriverName = vocRepository.getVOCsByDriverName(voc.getId(),
@@ -35,6 +38,7 @@ public class PenaltyService {
         return CreatePenaltyResponse.of(savedPenalty);
     }
 
+    @Transactional
     public String confirmPenalty(Long penaltyId, ConfirmPenaltyRequest confirmPenaltyRequest) {
         Penalty penalty = penaltyRepository.getById(penaltyId);
         // 기사가 승인할 경우
@@ -48,7 +52,7 @@ public class PenaltyService {
 
     private static String acceptedPenalty(Penalty penalty) {
         penalty.confirmByDriver();
-        return PenaltyMessages.CONFIRMED.getMessage();
+        return Messages.CONFIRMED.getMessage();
     }
 
     private String rejectedPenalty(ConfirmPenaltyRequest confirmPenaltyRequest, Penalty penalty) {
@@ -57,6 +61,6 @@ public class PenaltyService {
                 objectionRepository.save(Objection.of(penalty, confirmPenaltyRequest.getContent()));
         penalty.rejectConfirmationByDriver(saveObjection);
         penaltyRepository.save(penalty);
-        return PenaltyMessages.OBJECTION.getMessage();
+        return Messages.OBJECTION.getMessage();
     }
 }

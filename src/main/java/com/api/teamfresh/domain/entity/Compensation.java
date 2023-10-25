@@ -9,10 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.NoArgsConstructor;
 
 /**
  * 배상 Entity
  */
+@NoArgsConstructor
 @Entity
 public class Compensation extends BaseTimeEntity {
     @Id
@@ -25,4 +27,11 @@ public class Compensation extends BaseTimeEntity {
     @Column
     private Float amount;
 
+    private Compensation(VOC voc, Float amount) {
+        this.voc = voc;
+        this.amount = amount;
+    }
+    public static Compensation of(VOC voc, Float amount) {
+        return new Compensation(voc,amount);
+    }
 }

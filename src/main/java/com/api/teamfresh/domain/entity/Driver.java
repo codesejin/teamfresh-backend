@@ -30,6 +30,7 @@ public class Driver {
     private String name;
     @Column
     private String phoneNumber;
+
     @Column(name = "monthly_penalty")
     private Float monthlyPenalty; // 패널티 차감 금액
 
