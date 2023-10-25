@@ -9,5 +9,6 @@ public final class ErrorMessages {
     public static final String NOT_FOUND_DRIVER = "해당하는 운전기사를 찾을 수 없습니다.";
     public static final String NOT_FOUND_PENALTY = "해당하는 패널티를 찾을 수 없습니다.";
     public static final String CHECK_OBJECTION_WITH_PENALTY = "이의를 제기하려면 모두 적어주세요.";
+    public static final String CHECK_REQUEST_FIELD = "모든 필드는 null이 아니어야 합니다.";
 
 }

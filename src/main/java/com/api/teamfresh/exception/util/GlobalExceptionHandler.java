@@ -1,5 +1,6 @@
 package com.api.teamfresh.exception.util;
 
+import com.api.teamfresh.exception.AllRequestException;
 import com.api.teamfresh.exception.DriverNotFoundException;
 import com.api.teamfresh.exception.PenaltyBadRequestException;
 import com.api.teamfresh.exception.PenaltyNotFoundException;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(AllRequestException.class)
+    public ResponseEntity<APIResponse> handleNotFoundException(AllRequestException ex) {
+        return ResponseEntity.badRequest().body(APIResponse.of(400, ex.getMessage()));
+    }
     @ExceptionHandler(DriverNotFoundException.class)
     public ResponseEntity<APIResponse> handleNotFoundException(DriverNotFoundException ex) {
         return ResponseEntity.badRequest().body(APIResponse.of(400, ex.getMessage()));

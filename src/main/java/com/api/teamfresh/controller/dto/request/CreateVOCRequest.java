@@ -1,9 +1,12 @@
 package com.api.teamfresh.controller.dto.request;
 
+import static com.api.teamfresh.exception.util.ErrorMessages.CHECK_REQUEST_FIELD;
+
 import com.api.teamfresh.domain.constants.BlameType;
 import com.api.teamfresh.domain.constants.CarrierName;
 import com.api.teamfresh.domain.constants.ClaimEntryType;
 import com.api.teamfresh.domain.constants.VOCContent;
+import com.api.teamfresh.exception.AllRequestException;
 import java.util.stream.Stream;
 import lombok.Getter;
 
@@ -21,7 +24,7 @@ public class CreateVOCRequest {
 
     public void verifyRequest(CreateVOCRequest createVOCRequest) {
         if (containsNullField(createVOCRequest)) {
-            throw new IllegalArgumentException("모든 필드는 null이 아니어야 합니다.");
+            throw new AllRequestException(CHECK_REQUEST_FIELD);
         }
     }
 

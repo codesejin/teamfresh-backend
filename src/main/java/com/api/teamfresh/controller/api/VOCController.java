@@ -30,8 +30,9 @@ public class VOCController {
     // voc 등록
     @PostMapping("/voc")
     public ResponseEntity<CreateVOCResponse> createVOC(@RequestBody final CreateVOCRequest createVOCRequest) {
-        CreateVOCResponse voc = vocService.createVOC(createVOCRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(voc);
+        // 모든 값이 들어오는지 유효성 검사
+        createVOCRequest.verifyRequest(createVOCRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(vocService.createVOC(createVOCRequest));
     }
 
 }
