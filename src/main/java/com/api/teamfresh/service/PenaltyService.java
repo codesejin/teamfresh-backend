@@ -12,7 +12,7 @@ import com.api.teamfresh.domain.repository.DriverRepository;
 import com.api.teamfresh.domain.repository.ObjectionRepository;
 import com.api.teamfresh.domain.repository.PenaltyRepository;
 import com.api.teamfresh.domain.repository.VOCRepository;
-import com.api.teamfresh.exception.util.Messages;
+import com.api.teamfresh.util.Messages;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
